@@ -1,4 +1,4 @@
-import { AppareilService } from '../services/appareil.service';
+import {AppareilService} from '../services/appareil.service';
 import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
@@ -28,10 +28,10 @@ export class AppareilComponent implements OnInit {
     }
   }
   onSwitch() {
-    if(this.appareilStatus === 'allumé') {
+    if (this.appareilStatus === 'allumé') {
       this.appareilService.switchOffOne(this.index);
-    } else if(this.appareilStatus === 'éteint') {
+    } else if (this.appareilStatus === 'éteint') {
       this.appareilService.switchOnOne(this.index);
     }
-}
+  }
 }
