@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n\t<div class=\"row\">\r\n\t\t<div class=\"col-xs-12\">\r\n\t\t\t<router-outlet></router-outlet>\r\n\t\t</div>\r\n\t</div>\r\n</div>\r\n<nav class=\"navbar navbar-default\">\r\n\t<div class=\"container-fluid\">\r\n\t\t<div class=\"navbar-collapse\">\r\n\t\t\t<ul class=\"nav navbar-nav\">\r\n\t\t\t\t<li routerLinkActive=\"active\"><a routerLink=\"auth\">Authentification</a></li>\r\n\t\t\t\t<li routerLinkActive=\"active\"><a routerLink=\"appareils\">Appareils</a></li>\r\n\t\t\t</ul>\r\n\t\t</div>\r\n\t</div>\r\n</nav>\r\n<div class=\"container\">\r\n\t<div class=\"row\">\r\n\t\t<div class=\"col-xs-12\">\r\n\t\t\t<router-outlet></router-outlet>\r\n\t\t</div>\r\n\t</div>\r\n</div>"
+module.exports = "<nav class=\"navbar navbar-default\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"navbar-collapse\">\r\n      <ul class=\"nav navbar-nav\">\r\n        <li><a routerLink=\"auth\">Authentification</a></li>\r\n        <li class=\"active\"><a routerLink=\"appareils\">Appareils</a></li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</nav>\r\n<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -74,6 +74,22 @@ var AppComponent = /** @class */ (function () {
     }
     AppComponent.prototype.ngOnInit = function () {
     };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        __metadata("design:type", String)
+    ], AppComponent.prototype, "appareilName", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        __metadata("design:type", String)
+    ], AppComponent.prototype, "appareilStatus", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        __metadata("design:type", Number)
+    ], AppComponent.prototype, "index", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        __metadata("design:type", Number)
+    ], AppComponent.prototype, "id", void 0);
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-root',
@@ -111,6 +127,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _single_appareil_single_appareil_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./single-appareil/single-appareil.component */ "./src/app/single-appareil/single-appareil.component.ts");
+/* harmony import */ var _four_oh_four_four_oh_four_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./four-oh-four/four-oh-four.component */ "./src/app/four-oh-four/four-oh-four.component.ts");
+/* harmony import */ var _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./services/auth-guard.service */ "./src/app/services/auth-guard.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -129,10 +147,15 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
 var appRoutes = [
-    { path: 'appareils', component: _appareil_view_appareil_view_component__WEBPACK_IMPORTED_MODULE_7__["AppareilViewComponent"] },
+    { path: 'appareils', canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]], component: _appareil_view_appareil_view_component__WEBPACK_IMPORTED_MODULE_7__["AppareilViewComponent"] },
+    { path: 'appareils/:id', canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]], component: _single_appareil_single_appareil_component__WEBPACK_IMPORTED_MODULE_11__["SingleAppareilComponent"] },
     { path: 'auth', component: _auth_auth_component__WEBPACK_IMPORTED_MODULE_6__["AuthComponent"] },
-    { path: '', component: _appareil_view_appareil_view_component__WEBPACK_IMPORTED_MODULE_7__["AppareilViewComponent"] }
+    { path: '', component: _appareil_view_appareil_view_component__WEBPACK_IMPORTED_MODULE_7__["AppareilViewComponent"] },
+    { path: 'not-found', component: _four_oh_four_four_oh_four_component__WEBPACK_IMPORTED_MODULE_12__["FourOhFourComponent"] },
+    { path: '**', redirectTo: 'not-found' }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -145,7 +168,8 @@ var AppModule = /** @class */ (function () {
                 _appareil_appareil_component__WEBPACK_IMPORTED_MODULE_3__["AppareilComponent"],
                 _appareil_view_appareil_view_component__WEBPACK_IMPORTED_MODULE_7__["AppareilViewComponent"],
                 _auth_auth_component__WEBPACK_IMPORTED_MODULE_6__["AuthComponent"],
-                _single_appareil_single_appareil_component__WEBPACK_IMPORTED_MODULE_11__["SingleAppareilComponent"]
+                _single_appareil_single_appareil_component__WEBPACK_IMPORTED_MODULE_11__["SingleAppareilComponent"],
+                _four_oh_four_four_oh_four_component__WEBPACK_IMPORTED_MODULE_12__["FourOhFourComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__["BrowserModule"],
@@ -173,7 +197,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  appareil-view works!\n</p>\n"
+module.exports = "<div class=\"container\">\r\n\t<div class=\"row\">\r\n\t\t<div class=\"col-xs-12\">\r\n\t\t\t<ul class=\"list-group\">\r\n\t\t\t\t<app-appareil *ngFor=\"let appareil of appareils; let i = index\"\r\n\t\t\t\t\t[appareilName]=\"appareil.name\" [appareilStatus]=\"appareil.status\"\r\n\t\t\t\t\t[index]=\"i\" [id]=\"appareil.id\"></app-appareil>\r\n\t\t\t</ul>\r\n\t\t</div>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
@@ -199,6 +223,7 @@ module.exports = ""
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppareilViewComponent", function() { return AppareilViewComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_appareil_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/appareil.service */ "./src/app/services/appareil.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -209,18 +234,54 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var AppareilViewComponent = /** @class */ (function () {
-    function AppareilViewComponent() {
+    function AppareilViewComponent(appareilService) {
+        this.appareilService = appareilService;
+        this.lastUpdate = new Promise(function (resolve, reject) {
+            var date = new Date();
+            setTimeout(function () {
+                resolve(date);
+            }, 2000);
+        });
     }
     AppareilViewComponent.prototype.ngOnInit = function () {
+        this.appareils = this.appareilService.appareils;
     };
+    AppareilViewComponent.prototype.onAllumer = function () {
+        this.appareilService.switchOnAll();
+    };
+    AppareilViewComponent.prototype.onEteindre = function () {
+        if (confirm('Etes-vous s�r de vouloir �teindre tous vos appareils ?')) {
+            this.appareilService.switchOffAll();
+        }
+        else {
+            return null;
+        }
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", String)
+    ], AppareilViewComponent.prototype, "appareilName", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", String)
+    ], AppareilViewComponent.prototype, "appareilStatus", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Number)
+    ], AppareilViewComponent.prototype, "index", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Number)
+    ], AppareilViewComponent.prototype, "id", void 0);
     AppareilViewComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-appareil-view',
             template: __webpack_require__(/*! ./appareil-view.component.html */ "./src/app/appareil-view/appareil-view.component.html"),
             styles: [__webpack_require__(/*! ./appareil-view.component.scss */ "./src/app/appareil-view/appareil-view.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_appareil_service__WEBPACK_IMPORTED_MODULE_1__["AppareilService"]])
     ], AppareilViewComponent);
     return AppareilViewComponent;
 }());
@@ -236,7 +297,7 @@ var AppareilViewComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<li [ngClass]=\"{'list-group-item': true,\r\n                'list-group-item-success': appareilStatus === 'allumé',\r\n                'list-group-item-danger': appareilStatus === 'éteint'}\">\r\n  \r\n  <h4 [ngStyle]=\"{color: getColor()}\">Appareil : {{ appareilName }} -- Statut : {{ getStatus() }}</h4>\r\n<a [routerLink]=\"[id]\">Détail</a>\r\n  <input type=\"text\" class=\"form-control\" [(ngModel)]=\"appareilName\">\r\n\r\n  \r\n</li>"
+module.exports = "<li [ngClass]=\"{'list-group-item': true,\r\n                'list-group-item-success': appareilStatus === 'allumé',\r\n                'list-group-item-danger': appareilStatus === 'éteint'}\">\r\n  \r\n  <h4 [ngStyle]=\"{color: getColor()}\">Appareil : {{ appareilName }} -- Statut : {{ getStatus() }}</h4>\r\n<a [routerLink]=\"[id]\">Detail</a>\r\n  <input type=\"text\" class=\"form-control\" [(ngModel)]=\"appareilName\">\r\n\r\n  \r\n</li>"
 
 /***/ }),
 
@@ -284,10 +345,10 @@ var AppareilComponent = /** @class */ (function () {
         return this.appareilStatus;
     };
     AppareilComponent.prototype.getColor = function () {
-        if (this.appareilStatus === 'allumé') {
+        if (this.appareilStatus === 'allum�') {
             return 'green';
         }
-        else if (this.appareilStatus === 'éteint') {
+        else if (this.appareilStatus === '�teint') {
             return 'red';
         }
     };
@@ -329,7 +390,7 @@ var AppareilComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  auth works!\n</p>\n"
+module.exports = "<h2>Authentification</h2>\r\n<button class=\"btn btn-success\" *ngIf=\"!authStatus\" (click)=\"onSignIn()\">Se connecter</button>\r\n<button class=\"btn btn-danger\" *ngIf=\"authStatus\" (click)=\"onSignOut()\">Se d�connecter</button>\r\n"
 
 /***/ }),
 
@@ -355,6 +416,8 @@ module.exports = ""
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthComponent", function() { return AuthComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -365,10 +428,27 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var AuthComponent = /** @class */ (function () {
-    function AuthComponent() {
+    function AuthComponent(authService, router) {
+        this.authService = authService;
+        this.router = router;
     }
     AuthComponent.prototype.ngOnInit = function () {
+        this.authStatus = this.authService.isAuth;
+    };
+    AuthComponent.prototype.onSignIn = function () {
+        var _this = this;
+        this.authService.signIn().then(function () {
+            console.log('Sign in successful!');
+            _this.authStatus = _this.authService.isAuth;
+            _this.router.navigate(['appareils']);
+        });
+    };
+    AuthComponent.prototype.onSignOut = function () {
+        this.authService.signOut();
+        this.authStatus = this.authService.isAuth;
     };
     AuthComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -376,9 +456,72 @@ var AuthComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./auth.component.html */ "./src/app/auth/auth.component.html"),
             styles: [__webpack_require__(/*! ./auth.component.scss */ "./src/app/auth/auth.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], AuthComponent);
     return AuthComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/four-oh-four/four-oh-four.component.html":
+/*!**********************************************************!*\
+  !*** ./src/app/four-oh-four/four-oh-four.component.html ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h2>Erreur 404</h2>\n<p>La page que vous cherchez n'existe pas !</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/four-oh-four/four-oh-four.component.scss":
+/*!**********************************************************!*\
+  !*** ./src/app/four-oh-four/four-oh-four.component.scss ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/four-oh-four/four-oh-four.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/four-oh-four/four-oh-four.component.ts ***!
+  \********************************************************/
+/*! exports provided: FourOhFourComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FourOhFourComponent", function() { return FourOhFourComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var FourOhFourComponent = /** @class */ (function () {
+    function FourOhFourComponent() {
+    }
+    FourOhFourComponent.prototype.ngOnInit = function () {
+    };
+    FourOhFourComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-four-oh-four',
+            template: __webpack_require__(/*! ./four-oh-four.component.html */ "./src/app/four-oh-four/four-oh-four.component.html"),
+            styles: [__webpack_require__(/*! ./four-oh-four.component.scss */ "./src/app/four-oh-four/four-oh-four.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], FourOhFourComponent);
+    return FourOhFourComponent;
 }());
 
 
@@ -509,6 +652,56 @@ var AppareilService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/services/auth-guard.service.ts":
+/*!************************************************!*\
+  !*** ./src/app/services/auth-guard.service.ts ***!
+  \************************************************/
+/*! exports provided: AuthGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuard", function() { return AuthGuard; });
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var AuthGuard = /** @class */ (function () {
+    function AuthGuard(authService, router) {
+        this.authService = authService;
+        this.router = router;
+    }
+    AuthGuard.prototype.canActivate = function (route, state) {
+        if (this.authService.isAuth) {
+            return true;
+        }
+        else {
+            this.router.navigate(['/auth']);
+        }
+    };
+    AuthGuard = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])(),
+        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_0__["Router"]])
+    ], AuthGuard);
+    return AuthGuard;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/auth.service.ts":
 /*!******************************************!*\
   !*** ./src/app/services/auth.service.ts ***!
@@ -521,7 +714,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthService", function() { return AuthService; });
 var AuthService = /** @class */ (function () {
     function AuthService() {
+        this.isAuth = false;
     }
+    AuthService.prototype.signIn = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                _this.isAuth = true;
+                resolve(true);
+            }, 2000);
+        });
+    };
+    AuthService.prototype.signOut = function () {
+        this.isAuth = false;
+    };
     return AuthService;
 }());
 
@@ -536,7 +742,7 @@ var AuthService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  single-appareil works!\n</p>\n"
+module.exports = "<h2>{{ name }}</h2>\r\n<p>Statut : {{ status }}</p>\r\n<a routerLink=\"/appareils\">Retour � la liste</a>\r\n"
 
 /***/ }),
 
@@ -562,6 +768,8 @@ module.exports = ""
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SingleAppareilComponent", function() { return SingleAppareilComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_appareil_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/appareil.service */ "./src/app/services/appareil.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -572,10 +780,19 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var SingleAppareilComponent = /** @class */ (function () {
-    function SingleAppareilComponent() {
+    function SingleAppareilComponent(appareilService, route) {
+        this.appareilService = appareilService;
+        this.route = route;
+        this.name = 'Appareil';
+        this.status = 'Statut';
     }
     SingleAppareilComponent.prototype.ngOnInit = function () {
+        var id = this.route.snapshot.params['id'];
+        this.name = this.appareilService.getAppareilById(+id).name;
+        this.status = this.appareilService.getAppareilById(+id).status;
     };
     SingleAppareilComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -583,7 +800,8 @@ var SingleAppareilComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./single-appareil.component.html */ "./src/app/single-appareil/single-appareil.component.html"),
             styles: [__webpack_require__(/*! ./single-appareil.component.scss */ "./src/app/single-appareil/single-appareil.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_appareil_service__WEBPACK_IMPORTED_MODULE_1__["AppareilService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
     ], SingleAppareilComponent);
     return SingleAppareilComponent;
 }());
