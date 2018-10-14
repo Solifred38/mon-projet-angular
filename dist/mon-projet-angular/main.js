@@ -70,7 +70,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var AppComponent = /** @class */ (function () {
     function AppComponent(appareilService) {
+        var _this = this;
         this.appareilService = appareilService;
+        setTimeout(function () {
+            _this.isAuth = true;
+        }, 4000);
     }
     AppComponent.prototype.ngOnInit = function () {
     };
@@ -128,7 +132,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _single_appareil_single_appareil_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./single-appareil/single-appareil.component */ "./src/app/single-appareil/single-appareil.component.ts");
 /* harmony import */ var _four_oh_four_four_oh_four_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./four-oh-four/four-oh-four.component */ "./src/app/four-oh-four/four-oh-four.component.ts");
-/* harmony import */ var _services_auth_guard_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./services/auth-guard.service */ "./src/app/services/auth-guard.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -148,10 +151,9 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
 var appRoutes = [
-    { path: 'appareils', canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]], component: _appareil_view_appareil_view_component__WEBPACK_IMPORTED_MODULE_7__["AppareilViewComponent"] },
-    { path: 'appareils/:id', canActivate: [_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]], component: _single_appareil_single_appareil_component__WEBPACK_IMPORTED_MODULE_11__["SingleAppareilComponent"] },
+    { path: 'appareils', component: _appareil_view_appareil_view_component__WEBPACK_IMPORTED_MODULE_7__["AppareilViewComponent"] },
+    { path: 'appareils/:id', component: _single_appareil_single_appareil_component__WEBPACK_IMPORTED_MODULE_11__["SingleAppareilComponent"] },
     { path: 'auth', component: _auth_auth_component__WEBPACK_IMPORTED_MODULE_6__["AuthComponent"] },
     { path: '', component: _appareil_view_appareil_view_component__WEBPACK_IMPORTED_MODULE_7__["AppareilViewComponent"] },
     { path: 'not-found', component: _four_oh_four_four_oh_four_component__WEBPACK_IMPORTED_MODULE_12__["FourOhFourComponent"] },
@@ -646,56 +648,6 @@ var AppareilService = /** @class */ (function () {
         this.appareils[i].status = 'éteint';
     };
     return AppareilService;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/services/auth-guard.service.ts":
-/*!************************************************!*\
-  !*** ./src/app/services/auth-guard.service.ts ***!
-  \************************************************/
-/*! exports provided: AuthGuard */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuard", function() { return AuthGuard; });
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth.service */ "./src/app/services/auth.service.ts");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var AuthGuard = /** @class */ (function () {
-    function AuthGuard(authService, router) {
-        this.authService = authService;
-        this.router = router;
-    }
-    AuthGuard.prototype.canActivate = function (route, state) {
-        if (this.authService.isAuth) {
-            return true;
-        }
-        else {
-            this.router.navigate(['/auth']);
-        }
-    };
-    AuthGuard = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])(),
-        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_0__["Router"]])
-    ], AuthGuard);
-    return AuthGuard;
 }());
 
 

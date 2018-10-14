@@ -7,6 +7,7 @@ import {AppareilViewComponent} from './appareil-view/appareil-view.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  isAuth: boolean;
 
   @Input() appareilName: string;
   @Input() appareilStatus: string;
@@ -15,6 +16,11 @@ export class AppComponent implements OnInit {
   appareils: any[];
 
   constructor(private appareilService: AppareilService) {
+    setTimeout(
+      () => {
+        this.isAuth = true;
+      }, 4000
+    );
   }
   ngOnInit() {
   }
